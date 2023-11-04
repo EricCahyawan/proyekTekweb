@@ -19,17 +19,17 @@
                         <h2>Sign Up</h2>
                         <div class="inputbox">
                             <ion-icon name="person-outline"></ion-icon>
-                            <input type="username" required>
+                            <input type="username" name="username"required>
                             <label for="">Username</label>
                         </div>
                         <div class="inputbox">
                             <ion-icon name="mail-outline"></ion-icon>
-                            <input type="email" required>
+                            <input type="email" name="email" required>
                             <label for="">Email</label>
                         </div>
                         <div class="inputbox">
                             <ion-icon name="lock-closed-outline"></ion-icon>
-                            <input type="password" required>
+                            <input type="password" name="password" required>
                             <label for="">Password</label>
                         </div>
                         
@@ -53,10 +53,12 @@
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO user (username, email, password)
-            VALUES ('$username', '$email', '$password')";
+            VALUES ('$username', '$email', '$hashedPassword')";
             $stmt = $conn->query($query); 
             session_destroy();
         }
+        echo '<script>window.alert("Akun telah terdaftar :)");</script>';
     ?>
 </html>
