@@ -59,6 +59,6 @@
             $stmt = $conn->query($query); 
             session_destroy();
         }
-        echo '<script>window.alert("Akun telah terdaftar :)");</script>';
+        
     ?>
 </html>
