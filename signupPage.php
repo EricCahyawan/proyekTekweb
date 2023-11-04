@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     require "db_connect.php"; 
 ?>
 <!doctype html>
@@ -47,9 +46,6 @@
   </body>
   <?php
         if(isset($_POST['signUp'])){
-            $_SESSION['username'] = $_POST['username'];
-            $_SESSION['email'] = $_POST['email'];
-            $_SESSION['password'] = $_POST['password'];
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -57,8 +53,6 @@
             $query = "INSERT INTO user (username, email, password)
             VALUES ('$username', '$email', '$hashedPassword')";
             $stmt = $conn->query($query); 
-            session_destroy();
         }
-        echo '<script>window.alert("Akun telah terdaftar :)");</script>';
     ?>
 </html>

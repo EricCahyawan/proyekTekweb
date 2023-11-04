@@ -1,4 +1,5 @@
-<?php
+<?php 
+    require "db_connect.php"; 
     session_start();
 ?>
 <html>
@@ -10,22 +11,22 @@
         <section>
             <div class="form-box">
                 <div class="form-value">
-                    <form action="">
+                    <form action="loginPage.php" method="post">
                         <h2>Login</h2>
                         <div class="inputbox">
                             <ion-icon name="mail-outline"></ion-icon>
-                            <input type="email" required>
+                            <input type="email" name="email" required>
                             <label for="">Email</label>
                         </div>
                         <div class="inputbox">
                             <ion-icon name="lock-closed-outline"></ion-icon>
-                            <input type="password" required>
+                            <input type="password" name="password" required>
                             <label for="">Password</label>
                         </div>
                         <div class="forget">
                             <label for=""><input type="checkbox">Save Account <a href="#"></a></label>
                         </div>
-                        <button>Log In</button>
+                        <button name="logIn">Log In</button>
                         <div class="register">
                             <p>Don't have an account? Click <a href="signupPage.php">Sign Up</a></p>
                         </div>
@@ -37,6 +38,21 @@
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
     <?php
-    
+    if(isset($_POST['logIn'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $query = "SELECT * FROM user WHERE email = '$email'";
+        $result = $conn->query($query);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            $hashedPassword = $row['password'];
+            if(password_verify($password, $hashedPassword)){
+                $_SESSION['username'] = $row['username'];
+                header("Location: mainPage.php");
+            } else {
+                echo '<script>window.alert("Invalid Data");</script>';
+            }
+        }
+    }
     ?>
 </html>
