@@ -41,17 +41,24 @@
     if(isset($_POST['logIn'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $query = "SELECT * FROM user WHERE email = '$email'";
+        $query = "SELECT username, email, password FROM user WHERE email = '$email'";
         $result = $conn->query($query);
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
+        $rowcount = $result->rowCount();
+        if($rowcount > 0){
+            $row = $result->fetch();
             $hashedPassword = $row['password'];
             if(password_verify($password, $hashedPassword)){
                 $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSIOn['password'] = $row['password'];
                 header("Location: mainPage.php");
-            } else {
-                echo '<script>window.alert("Invalid Data");</script>';
+            } 
+            else {
+                echo '<script>window.alert("Invalid Password");</script>';
             }
+        }
+        else{
+            echo "<script>window.alert('Email doesn\'t exist');</script>";
         }
     }
     ?>

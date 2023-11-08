@@ -50,9 +50,16 @@
             $email = $_POST['email'];
             $password = $_POST['password'];
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO user (username, email, password)
-            VALUES ('$username', '$email', '$hashedPassword')";
-            $stmt = $conn->query($query); 
+            $checkEmailQuery = "SELECT * FROM user WHERE email = '$email'";
+            $result = $conn->query($checkEmailQuery);
+            $rowCount = $result->rowCount();
+            if ($rowCount > 0) {
+                echo "<script>window.alert('Email already registered. Please use a different email.');</script>";
+            } else {
+                $query = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
+                $stmt = $conn->query($query); 
+                echo "<script>window.alert('Registration successful!');</script>";
+            }
         }
     ?>
 </html>
