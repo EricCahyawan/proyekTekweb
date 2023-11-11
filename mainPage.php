@@ -20,6 +20,15 @@
         margin-left: 1cm;
         margin-right: 1cm;
       }
+      #modal-body{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: Wrap;
+        justify-content: flex-start;
+      }
+      .card{
+        flex: 33.33%;
+      }
     </style>
   </head>
   <body>
@@ -40,13 +49,13 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+                Action
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><button class="dropdown-item">&#10133; (Add Post)</button></li>
+                <li><button class="dropdown-item">&#10134; (Delete Post)</button></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><!-- Button trigger modal --><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">&#10067; (View Profile)</button></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -69,10 +78,10 @@
       <div class="col-4">
         <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
           <nav class="nav nav-pills flex-column">
-            <a class="nav-link" href="#item-1">Item 1</a>
+            <a class="nav-link" href="#item-1">SPORTS</a>
             <nav class="nav nav-pills flex-column">
-              <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-              <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
+              <a class="nav-link ms-3 my-1" href="#item-1-1">FOOTBALL</a>
+              <a class="nav-link ms-3 my-1" href="#item-1-2">BADMINTON</a>
             </nav>
             <a class="nav-link" href="#item-2">Item 2</a>
             <a class="nav-link" href="#item-3">Item 3</a>
@@ -86,15 +95,15 @@
       <div class="col-8">
         <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
           <div id="item-1">
-            <h4>Item 1</h4>
+            <h4>SPORTS</h4>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quidem excepturi, placeat iste consequatur dolorem saepe eveniet aut nam. Neque, aspernatur! Ex, cumque omnis sint esse a ad iusto eius?</p>
           </div>
           <div id="item-1-1">
-            <h5>Item 1-1</h5>
+            <h5>FOOTBALL</h5>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam libero fuga suscipit reprehenderit saepe nihil facilis. Similique corrupti totam explicabo nemo, inventore dolores quaerat ipsum neque placeat blanditiis dolorem reiciendis?</p>
           </div>
           <div id="item-1-2">
-            <h5>Item 1-2</h5>
+            <h5>BADMINTON</h5>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias cum facere unde architecto eveniet, quis maxime ipsa ex repellendus molestiae quidem asperiores non labore quam rem porro voluptates cumque quaerat.</p>
           </div>
           <div id="item-2">
@@ -122,6 +131,56 @@
       </div>
     </div>
     <!-- nested nav -->
+    <!-- modal View Profile -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <!-- card -->
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <div class="card" style="width: 18rem;">
+              <img src="..." class="card-img-top" alt="...">
+            </div>
+            <!-- card -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal -->
     <a href="loginPage.php">
       Log out <?php session_destroy();?>
     </a>
