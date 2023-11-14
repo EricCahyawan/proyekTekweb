@@ -52,10 +52,10 @@
                 Action
               </a>
               <ul class="dropdown-menu">
-                <li><button class="dropdown-item">&#10133; (Add Post)</button></li>
+                <li><button class="dropdown-item"type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdropAdd">&#10133; (Add Post)</button></li>
                 <li><button class="dropdown-item">&#10134; (Delete Post)</button></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><!-- Button trigger modal --><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">&#10067; (View Profile)</button></li>
+                <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">&#10067; (View Profile)</button></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -180,6 +180,28 @@
         </div>
       </div>
     </div>
+
+    <!-- addPostModal -->
+    <div class="modal fade" id="staticBackdropAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">ADD POST</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="modal-body">
+                <form class="my-5" method="post" enctype="multipart/form-data">
+                  <input type="file" name="image" class="form-control">
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <input type="submit" name="upload" value="Upload" class="btn btn-success my-3">
+              </div>
+            </div>
+          </div>
+    </div>
+
     <!-- modal -->
     <a href="loginPage.php">
       Log out <?php session_destroy();?>
