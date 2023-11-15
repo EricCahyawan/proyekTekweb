@@ -30,22 +30,48 @@
         flex: 33.33%;
       }
       #profile-frame {
-            width: 200px;
-            height: 200px;
-            border: 2px solid #ccc;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-        }
+        width: 200px;
+        height: 200px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+      }
 
       #profile-picture {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       #file-input {
-          display: none;
+        display: none;
+      }
+      #profile-container{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        background-color: red;
+      }
+      #profile-item1{
+        flex:30%;
+        background-color: lightgrey;
+        padding: 1px;
+      }
+      #profile-item2{
+        flex:70%;
+        background-color: pink;
+        padding: 1px;
+      }
+      textarea {
+      width: 100%; /* Adjust the width as needed */
+      height: 80px; /* Adjust the height as needed */
+      padding: 5px; /* Add some padding */
+      box-sizing: border-box; /* Ensure that the width and height properties include the padding and border */
+      border: 2px solid #ccc; /* Add a border */
+      border-radius: 4px; /* Add rounded corners to the border */
+      background-color: #f8f8f8; /* Set the background color */
+      resize: none; /* Disable the ability to resize the textarea */
       }
     </style>
   </head>
@@ -185,6 +211,44 @@
                   }
               ?>
             </div>
+            <div class="container" id="profile-container">
+              <div id="profile-item1">
+                <span>
+                  <h2>
+                    <?php
+                      echo $_SESSION['username'];
+                    ?>
+                  </h2>
+                </span>
+              </div>
+              <div id="profile-item2">
+                <b>Description:</b>
+                <form action="mainPage.php" method="post">
+                  <textarea name="textarea" id="textarea" cols="30" rows="10"><?php
+                    $email = $_SESSION['email'];
+                    $sql = "SELECT description FROM user WHERE email = '$email'";
+                    $result = $conn->query($sql);
+                    if ($result && $result->rowCount() > 0) {
+                      $row = $result->fetch(PDO::FETCH_ASSOC);
+                      $descriptionFromDatabase = $row["description"];
+                      echo $descriptionFromDatabase;
+                  }
+                  ?></textarea>
+                  <button class="btn btn-primary" name="save-changes">Save Changes</button>
+                </form>
+                <?php
+                  if(isset($_POST['save-changes'])){
+                    if(isset($_POST['textarea'])){
+                      $_SESSION['description'] = $_POST['textarea'];
+                      $description = $_SESSION['description'];
+                      $email = $_SESSION['email'];
+                      $query = "UPDATE user SET description = '$description' WHERE email = '$email'";
+                      $result = $conn->query($query);
+                    }
+                  }
+                ?>
+              </div>
+            </div>
           </div>
           <div class="modal-body" id="modal-body">
             <!-- card -->
@@ -219,9 +283,6 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <form action="mainPage.php" method="post"> 
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" name="save-changes">Save Changes</button>
-            </form>
           </div>
         </div>
       </div>
@@ -249,9 +310,15 @@
     </div>
 
     <!-- modal -->
-    <a href="loginPage.php">
-      Log out <?php session_destroy();?>
-    </a>
+    <form action="mainPage.php" method="post">
+      <button type="button" class="btn btn-link" name="logOut">Log Out</button>
+    </form>
+    <?php
+      if(isset($_POST['logOUt'])){
+        session_destroy();
+        header("Location: loginPage.php");
+      }
+    ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
