@@ -1,0 +1,187 @@
+#profile-child{
+    position: fixed;
+    background-color: #d9d9d9;
+    width: 14500px;
+    height: 119px;
+    top: 0;
+    z-index: 1;
+  }
+  .profile-item {
+    position: absolute;
+    top: -3px;
+    right: 0;
+    left: 0;
+    background-color: #d9d9d9;
+    width: 14500px;
+    height: 119px;
+  }
+  .profile-item {
+    top: 15px;
+    left: 1321px;
+    border-radius: 44px;
+    background-color: #9b9696;
+    width: 94px;
+    height: 93px;
+  }
+  .profile-inner,
+  .rectangle-div {
+    position: absolute;
+    top: 24px;
+    height: 70px;
+  }
+  .profile-inner {
+    left: 26px;
+    border-radius: 50%;
+    width: 70px;
+    object-fit: cover;
+  }
+  .rectangle-div {
+    left: 382px;
+    border-radius: 26px;
+    background-color: #f6f6f6;
+    width: 665px;
+  }
+  
+  .explore,
+  .search {
+    position: absolute;
+    top: 45px;
+  }
+  .search {
+    left: 451px;
+    font-weight: 500;
+    color: var(--color-gray);
+  }
+  .explore {
+    left: 261px;
+    font-weight: 600;
+  }
+  .logout {
+    position: relative;
+    font-weight: 600;
+  }
+  .logout-wrapper {
+    position: absolute;
+    top: 167px;
+    left: 1300px;
+    border-radius: 33px;
+    background-color: #b64d4d;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 26px;
+    color: #f2f2f2;
+  }
+  .posts {
+    position: absolute;
+    top: 554px;
+    left: 687px;
+    font-weight: 600;
+  }
+  .emailemailcom {
+    top: 474px;
+    left: 617px;
+  }
+  .emailemailcom,
+  .home,
+  .my-favourite,
+  .username {
+    position: absolute;
+    font-weight: 600;
+  }
+  .username {
+    top: 437px;
+    left: 642px;
+    font-size: 32px;
+    align-items: center;
+  }
+  .home,
+  .my-favourite {
+    top: 45px;
+    left: 140px;
+  }
+  .my-favourite {
+    left: 1152px;
+  }
+  .logo {
+    position: absolute;
+    top: 50px;
+    left: 38px;
+    font-size: 16px;
+    color: var(--color-gray);
+  }
+  .heart-svgrepo-com-2-1 {
+    position: absolute;
+    top: 42px;
+    left: 1109px;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .profile-circle-icon-512x512-zx {
+    position: absolute;
+    top: 167px;
+    left: 598px;
+    width: 244px;
+    height: 244px;
+    object-fit: cover;
+    align-items: center;
+  }
+  .line-div {
+    position: absolute;
+    top: 526px;
+    left: 80px;
+    right: 80px;
+    border-top: 3px solid #000;
+    box-sizing: border-box;
+    height: 3px;
+  }
+  .profile-child11 {
+    top: 586.5px;
+    left: 683.5px;
+    width: 73.12px;
+    height: 5px;
+  }
+  .layer-1-icon,
+  .profile-child11,
+  .profile-child12 {
+    position: absolute;
+    object-fit: cover;
+  }
+  .profile-child12 {
+    top: 1122px;
+    left: 1235px;
+    border-radius: 50%;
+    width: 126.8px;
+    height: 124.8px;
+  }
+  .layer-1-icon {
+    position: fixed;
+    top: 17cm;
+    right: 4cm;
+    overflow: hidden;
+  }
+  .profile-circle-icon-512x512-zx1 {
+    position: fixed;
+    top: 27px;
+    left: 1333px;
+    width: 69px;
+    height: 69px;
+    object-fit: cover;
+    z-index: 1;
+  }
+  .profile {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    height: 1276px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-5xl);
+    color: var(--color-dimgray);
+    font-family: var(--font-inter);
+  
+  }
