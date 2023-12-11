@@ -72,30 +72,35 @@
     align-items: center;
     justify-content: center;
     padding: 20px 26px;
-    color: #f2f2f2;
+ 
   }
   .posts {
     position: absolute;
-    top: 554px;
+    top: 660px;
     left: 687px;
     font-weight: 600;
   }
-  .emailemailcom {
-    top: 474px;
-    left: 617px;
+  #username-email-container{
+    position: absolute;
+    top: 11.4cm;
+    left: 3cm;
+    right: 3cm;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-right: 2.858cm;
   }
-  .emailemailcom,
+  .emailemailcom {
+    flex: 50%;
+  }
+  .username{
+    flex: 50%;
+  }
   .home,
-  .my-favourite,
-  .username {
+  .my-favourite{
     position: absolute;
     font-weight: 600;
-  }
-  .username {
-    top: 437px;
-    left: 642px;
-    font-size: 32px;
-    align-items: center;
   }
   .home,
   .my-favourite {
@@ -121,24 +126,17 @@
     overflow: hidden;
     object-fit: cover;
   }
-  .profile-circle-icon-512x512-zx {
-    position: absolute;
-    top: 167px;
-    left: 598px;
-    width: 244px;
-    height: 244px;
-    object-fit: cover;
-    align-items: center;
-  }
+  
   .line-div {
     position: absolute;
-    top: 526px;
+    top: 715px;
     left: 80px;
     right: 80px;
     border-top: 3px solid #000;
     box-sizing: border-box;
     height: 3px;
   }
+
   .profile-child11 {
     top: 586.5px;
     left: 683.5px;
@@ -164,6 +162,16 @@
     right: 4cm;
     overflow: hidden;
   }
+  .profile-circle-icon-512x512-zx{
+    position: absolute;
+    left: 15.33cm;
+    top: 4cm;
+    object-fit: cover;
+    width: 7cm;
+    height: 7cm; /*width dan height harus sama untuk lingkaran*/
+    border-radius: 50%; /*border radius 50% untuk lingkaran*/
+    overflow: hidden;
+  }
   .profile-circle-icon-512x512-zx1 {
     position: fixed;
     top: 27px;
@@ -172,6 +180,15 @@
     height: 69px;
     object-fit: cover;
     z-index: 1;
+  }
+  #description-submit{
+    margin-top: 10cm;
+    position: absolute;
+    top: 20cm;
+    width: 4cm;
+    left: 5cm;
+    background: none;
+    display: none;
   }
   .profile {
     position: relative;
@@ -184,4 +201,16 @@
     color: var(--color-dimgray);
     font-family: var(--font-inter);
   
+  }
+  textarea {
+    position: absolute;
+    left: 6.9cm;
+    width: 25cm;
+    height: 3.6cm;
+    top: 13.7cm;
+    padding: 5px; 
+    border: 2px solid #ccc; 
+    border-radius: 4px;
+    background-color: #f8f8f8; 
+    resize: none; 
   }

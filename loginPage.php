@@ -83,15 +83,14 @@
         $rowcount = $result->rowCount();
         if($rowcount > 0){
             $row = $result->fetch();
-            $hashedPassword = $row['password'];
-            if(password_verify($password, $hashedPassword)){
+            if(password_verify($password, $row['password'])){
+                echo '<script>window.alert("Invalid Password");</script>';
+            } 
+            else {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
-                header("Location: mainPage.php");
-            } 
-            else {
-                echo '<script>window.alert("Invalid Password");</script>';
+                header("Location: profilePage.php");
             }
         }
         else{

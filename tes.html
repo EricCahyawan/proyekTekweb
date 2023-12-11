@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #kotak{
+            padding: 1cm;
+            background-color: #f2f2f2;
+            margin: 5cm;
+            border-radius: 5%;
+            box-shadow: 0 5px 5px black;
+        }
+    </style>
+</head>
+<body>
+    <div id="kotak">
+        kotak
+    </div>
+</body>
+</html>
+<script>
+    let kotak = document.querySelector('#kotak');
+    kotak.addEventListener('click', (e) =>{
+        window.alert('hai');
+    });
+</script>
