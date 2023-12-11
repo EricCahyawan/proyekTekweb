@@ -1,5 +1,5 @@
 <?php 
-    require "db_connect.php"; 
+    require "classes/user.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +27,6 @@
             margin-left: -30px; 
             cursor: pointer;
         }
-
         /* properti border-radius untuk button "Sign Up" */
         #signUp {
             border-radius: 10px; /* agar sudut tidak siku jadi seperti pada login */
@@ -90,15 +89,12 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $checkEmailQuery = "SELECT * FROM user WHERE email = '$email'";
-        $result = $conn->query($checkEmailQuery);
-        $rowCount = $result->rowCount();
+        $rowcount = user :: get_rowcount_by_email($email);
         if ($rowCount > 0) {
             echo "<script>window.alert('Email already registered. Please use a different email.');</script>";
         } else {
-            $query = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
-            $stmt = $conn->query($query); 
-            echo "<script>window.alert('Registration successful!');</script>";
+            user :: add_user($username, $email, $password);
+            header("Location: loginPage.php");
         }
     }
 ?>
