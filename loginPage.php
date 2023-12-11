@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php 
-    require "db_connect.php"; 
+    require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
     session_start();
 ?>
 <html lang="en">
@@ -75,15 +75,14 @@
     </script>
 </body>
 <?php
-    if(isset($_POST['logIn'])){
+    if(count($_POST) > 0 && isset($_POST['logIn'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $query = "SELECT username, email, password FROM user WHERE email = '$email'";
-        $result = $conn->query($query);
-        $rowcount = $result->rowCount();
+        $rowcount = user :: get_rowcount_by_email($email);
         if($rowcount > 0){
-            $row = $result->fetch();
-            if(password_verify($password, $row['password'])){
+            $row = user :: get_user_by_email($email);
+            $hashedPassword = $row['password'];
+            if(password_verify($password, $hashedPassword)){
                 echo '<script>window.alert("Invalid Password");</script>';
             } 
             else {

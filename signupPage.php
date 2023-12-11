@@ -1,5 +1,5 @@
 <?php 
-    require "db_connect.php"; 
+    require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,20 +85,17 @@
     </script>
 </body>
 <?php
-    if(isset($_POST['signUp'])){
+    if(count($_POST) > 0 && isset($_POST['signUp'])){
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $checkEmailQuery = "SELECT * FROM user WHERE email = '$email'";
-        $result = $conn->query($checkEmailQuery);
-        $rowCount = $result->rowCount();
-        if ($rowCount > 0) {
+        $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+        $rowcount = user :: get_rowcount_by_email($email);
+        if ($rowcount > 0) {
             echo "<script>window.alert('Email already registered. Please use a different email.');</script>";
         } else {
-            $query = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$hashedPassword')";
-            $stmt = $conn->query($query); 
-            echo "<script>window.alert('Registration successful!');</script>";
+            user :: add_user($username, $email, $hashedpassword);
+            header("Location:loginPage.php");
         }
     }
 ?>

@@ -1,5 +1,5 @@
 <?php
-  require "db_connect.php"; 
+  require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
   session_start();
 ?>
 <!doctype html>
@@ -47,27 +47,6 @@
       <div class="posts">Posts</div>
       <form action="profilePage.php" method="post"> <!--description-->
         <textarea name="textarea" id="textarea">
-          <?php
-            $email = $_SESSION['email'];
-            $sql = "SELECT description FROM user WHERE email = '$email'";
-            $result = $conn->query($sql);
-            if ($result && $result->rowCount() > 0) {
-              $row = $result->fetch(PDO::FETCH_ASSOC);
-              $descriptionFromDatabase = $row["description"];
-              $_SESSION['description'] = $descriptionFromDatabase;
-              echo $_SESSION['description'];   
-              if(isset($_POST['save-changes'])){
-                if(isset($_POST['textarea'])){
-                  $description = $_POST['textarea'];
-                  $query = "UPDATE user SET description = NULL WHERE email = '$email'";
-                  $query2 = "UPDATE user SET description = '$description' WHERE email = '$email'";
-                  $result = $conn->query($query);
-                  $result2 = $conn->query($query2);
-                  header("Location: profilePage.php");
-                }
-              }
-            }
-          ?>
         </textarea>
         <button id="description-submit" name="save-changes">Save changes</button>
       </form>
