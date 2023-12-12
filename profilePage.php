@@ -23,7 +23,23 @@
         <div class="home" id="homeText">Home</div>
         <div class="explore" id="exploreText">Explore</div>
         <div class="profile-item"></div>
-        <input type="text" class="rectangle-div" placeholder="Search..."></input>
+        <input type="text" class="rectangle-div" placeholder="Search..." onkeyup="showHint(this.value)" id="search"></input>
+    
+        <script>
+          function showHint(str) {
+            if (str.length == 0) { 
+              document.getElementById("txtHint").innerHTML = "";
+              return;
+            }
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+              document.getElementById("txtHint").innerHTML =
+              this.responseText;
+            }
+            xhttp.open("GET", "gethint.php?q="+str);
+            xhttp.send();   
+        }
+</script>
         <img
         class="heart-svgrepo-com-2-1"
         alt=""
@@ -46,10 +62,23 @@
       ?>
       <div class="posts">Posts</div>
       <form action="profilePage.php" method="post"> <!--description-->
-        <textarea name="textarea" id="textarea">
-        </textarea>
+        <textarea name="textarea" id="textarea"><?php
+          $email = $_SESSION['email'];
+          $result = user :: get_user_by_email($email);
+          if(isset($result['description'])){
+            echo $result['description'];
+          }
+        ?></textarea>
         <button id="description-submit" name="save-changes">Save changes</button>
       </form>
+      <?php
+        if(count($_POST) > 0 && isset($_POST['save-changes'])){
+          $email = $_SESSION['email'];
+          $description = $_POST['textarea'];
+          user :: add_description_user_by_email($description, $email);
+          header("Location:profilePage.php");
+        }
+      ?>
       <div id="username-email-container">
         <div class="username"><?php echo $_SESSION['username'];?></div>
         <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
@@ -60,10 +89,8 @@
       </form>
       <?php
           $email = $_SESSION['email'];
-          $query1 = "SELECT src FROM user WHERE email = '$email'";
-          $result1 = $conn->query($query1);
-          $row = $result1->fetch(PDO::FETCH_ASSOC);
-          $_SESSION['src'] = $row['src'];
+          $result = user :: get_user_by_email($email);
+          $_SESSION['src'] = $result['src'];
           $src = $_SESSION['src'];
           // echo "<script>window.alert('{$src}');</script>"; //di database slashnya dah bener, tapi di programnya slashnya nda keluar
           // $query2 = "UPDATE user SET src = '$src' WHERE email = '$email'";
@@ -78,14 +105,12 @@
         ?>
       <div class="line-div"></div> <!--garis-->
       <img class="layer-1-icon" alt="" src="assets\Layer_1.png" /> <!--tombol add post-->
-      <form action="profilePage.php" methd="post"><button name="profile-atas-btn">
-        <img
-          id="profile-atas"
-          class="profile-circle-icon-512x512-zx1"
-          alt=""
-          src="assets\profileicon.png"
-        /> <!--profile atas-->
-      </button></form>
+      <img
+        id="profile-atas"
+        class="profile-circle-icon-512x512-zx1"
+        alt=""
+        src="assets\profileicon.png"
+      /> <!--profile atas-->
     </div>
   
     <script>
@@ -115,12 +140,8 @@
   
       var profileatas = document.getElementById("profile-atas");
       profileatas.addEventListener("click", (e) => {
-      <?php
-        if(isset($_POST['profile-atas-btn']))
-        {
-          header("Location: profilePage.php");
-        };
-      ?>});
+        window.location.href = "profilePage.php";
+      });
 
       var exploreText = document.getElementById("exploreText");
       exploreText.addEventListener("click", (e) => {
