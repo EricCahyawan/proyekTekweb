@@ -23,23 +23,7 @@
         <div class="home" id="homeText">Home</div>
         <div class="explore" id="exploreText">Explore</div>
         <div class="profile-item"></div>
-        <input type="text" class="rectangle-div" placeholder="Search..." onkeyup="showHint(this.value)" id="search"></input>
-    
-        <script>
-          function showHint(str) {
-            if (str.length == 0) { 
-              document.getElementById("txtHint").innerHTML = "";
-              return;
-            }
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-              document.getElementById("txtHint").innerHTML =
-              this.responseText;
-            }
-            xhttp.open("GET", "gethint.php?q="+str);
-            xhttp.send();   
-        }
-</script>
+        <input type="text" class="rectangle-div" placeholder="Search..."  id="search"></input>
         <img
         class="heart-svgrepo-com-2-1"
         alt=""
