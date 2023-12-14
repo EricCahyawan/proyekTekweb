@@ -1,5 +1,4 @@
 <?php
-  require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
   session_start();
   $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
@@ -18,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
-    <div class="profile"> <!--keseluruhan-->
+    <div class="profile" style="background-color:red"> <!--keseluruhan-->
       <div class="container-fluid" id="profile-child"> <!--navbar-->
         <b class="logo" id="lOGOText">LOGO</b>
         <div class="home" id="homeText" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</div>
@@ -33,62 +32,6 @@
         />
         <div class="my-favourite" id="myFavouriteText" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>My Favourite</div>
       </div>
-      <div class="ellipse-div"> </div>  
-      <form action="profilePage.php" method="post">
-        <div class="logout-wrapper">
-          <input type="submit" value="Logout" class="logout" name="logout">
-        </div>
-      </form>   
-      <?php
-        if(isset($_POST['logout'])){
-          session_destroy();
-          header("Location: loginPage.php");
-        }
-      ?>
-      <div class="posts">Posts</div>
-      <form action="profilePage.php" method="post"> <!--description-->
-        <textarea name="textarea" id="textarea"><?php
-          $email = $_SESSION['email'];
-          $result = user :: get_user_by_email($email);
-          if(isset($result['description'])){
-            echo $result['description'];
-          }
-        ?></textarea>
-        <button id="description-submit" name="save-changes">Save changes</button>
-      </form>
-      <?php
-        if(count($_POST) > 0 && isset($_POST['save-changes'])){
-          $email = $_SESSION['email'];
-          $description = $_POST['textarea'];
-          user :: add_description_user_by_email($description, $email);
-          header("Location:profilePage.php");
-        }
-      ?>
-      <div id="username-email-container">
-        <div class="username"><?php echo $_SESSION['username'];?></div>
-        <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
-      </div>
-      <form action="profilePage.php" method="post">
-        <input type="file" name="profileImage" id="fileInput" onchange="readURL(this);" style="display: none;">
-        <!--profile utama-->
-      </form>
-      <?php
-          $email = $_SESSION['email'];
-          $result = user :: get_user_by_email($email);
-          $_SESSION['src'] = $result['src'];
-          $src = $_SESSION['src'];
-          // echo "<script>window.alert('{$src}');</script>"; //di database slashnya dah bener, tapi di programnya slashnya nda keluar
-          // $query2 = "UPDATE user SET src = '$src' WHERE email = '$email'";
-          // $result2 = $conn->query($query2);
-          echo 
-          "<img
-          id='profile-utama'
-          class='profile-circle-icon-512x512-zx'
-          alt=''
-          src= '{$src}'
-          />"; 
-        ?>
-      <div class="line-div"></div> <!--garis-->
       <img class="layer-1-icon" alt="" src="assets\Layer_1.png" /> <!--tombol add post-->
       <img
         id="profile-atas"
@@ -97,32 +40,7 @@
         src="assets\profileicon.png"
       /> <!--profile atas-->
     </div>
-  
     <script>
-      var profileutama = document.getElementById("profile-utama");
-      let profileinput = document.getElementById("fileInput")
-      profileutama.addEventListener("click", (e) => {
-      profileinput.click();
-      });
-      function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-              profileutama.src = e.target.result;
-              var newImageSource = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]); 
-        }
-      }
-      
-      document.getElementById('textarea').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault(); // Prevent the default Enter key behavior (new line)
-          document.getElementById('description-submit').click();
-        }
-      });
-  
       var profileatas = document.getElementById("profile-atas");
       profileatas.addEventListener("click", (e) => {
         window.location.href = "profilePage.php";
@@ -130,7 +48,8 @@
 
       var exploreText = document.getElementById("exploreText");
       exploreText.addEventListener("click", (e) => {
-      window.location.href = "explorePage.php";})
+        window.location.href = "explorePage.php";});
+      
       
       var homeText = document.getElementById("homeText");
       homeText.addEventListener("click", (e) => {
