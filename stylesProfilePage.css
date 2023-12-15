@@ -143,7 +143,6 @@
     width: 73.12px;
     height: 5px;
   }
-  .layer-1-icon,
   .profile-child11,
   .profile-child12 {
     position: absolute;
@@ -158,7 +157,7 @@
   }
   .layer-1-icon {
     position: fixed;
-    top: 17cm;
+    top: 10cm;
     right: 4cm;
     overflow: hidden;
   }

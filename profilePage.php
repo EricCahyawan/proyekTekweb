@@ -2,6 +2,10 @@
   require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
   session_start();
   $currentPage = basename($_SERVER['PHP_SELF']);
+  if(isset($_POST['logout'])){
+    session_destroy();
+    header("Location:loginPage.php");
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,12 +14,237 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link rel="stylesheet" href="globalstylesProfilePage.css" />
-    <link rel="stylesheet" href="stylesProfilePage.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap"
     />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      #profile-child{
+        position: fixed;
+        background-color: #d9d9d9;
+        width: 14500px;
+        height: 119px;
+        top: 0;
+        z-index: 1;
+      }
+      .profile-item {
+        position: absolute;
+        top: -3px;
+        right: 0;
+        left: 0;
+        background-color: #d9d9d9;
+        width: 14500px;
+        height: 119px;
+      }
+      .profile-item {
+        top: 15px;
+        left: 1321px;
+        border-radius: 44px;
+        background-color: #9b9696;
+        width: 94px;
+        height: 93px;
+      }
+      .profile-inner,
+      .rectangle-div {
+        position: absolute;
+        top: 24px;
+        height: 70px;
+      }
+      .profile-inner {
+        left: 26px;
+        border-radius: 50%;
+        width: 70px;
+        object-fit: cover;
+      }
+      .rectangle-div {
+        left: 382px;
+        border-radius: 26px;
+        background-color: #f6f6f6;
+        width: 665px;
+      }
+      
+      .explore,
+      .search {
+        position: absolute;
+        top: 45px;
+      }
+      .search {
+        left: 451px;
+        font-weight: 500;
+        color: var(--color-gray);
+      }
+      .explore {
+        left: 261px;
+        font-weight: 600;
+      }
+      .logout {
+        position: relative;
+        font-weight: 600;
+        background-color:transparent;
+        border:none;
+      }
+      .logout-wrapper {
+        position: absolute;
+        top: 167px;
+        left: 1300px;
+        border-radius: 33px;
+        background-color: #b64d4d;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 26px;
+    
+      }
+      .posts {
+        position: absolute;
+        top: 660px;
+        left: 687px;
+        font-weight: 600;
+      }
+      #username-email-container{
+        position: absolute;
+        top: 11.4cm;
+        left: 3cm;
+        right: 3cm;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        padding-right: 2.858cm;
+      }
+      .emailemailcom {
+        flex: 50%;
+      }
+      .username{
+        flex: 50%;
+      }
+      .home,
+      .my-favourite{
+        position: absolute;
+        font-weight: 600;
+      }
+      .home,
+      .my-favourite {
+        top: 45px;
+        left: 140px;
+      }
+      .my-favourite {
+        left: 1152px;
+      }
+      .logo {
+        position: absolute;
+        top: 50px;
+        left: 38px;
+        font-size: 16px;
+        color: var(--color-gray);
+      }
+      .heart-svgrepo-com-2-1 {
+        position: absolute;
+        top: 42px;
+        left: 1109px;
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        object-fit: cover;
+      }
+      
+      .line-div {
+        position: absolute;
+        top: 715px;
+        left: 80px;
+        right: 80px;
+        border-top: 3px solid #000;
+        box-sizing: border-box;
+        height: 3px;
+      }
+
+      .profile-child11 {
+        top: 586.5px;
+        left: 683.5px;
+        width: 73.12px;
+        height: 5px;
+      }
+      .profile-child11,
+      .profile-child12 {
+        position: absolute;
+        object-fit: cover;
+      }
+      .profile-child12 {
+        top: 1122px;
+        left: 1235px;
+        border-radius: 50%;
+        width: 126.8px;
+        height: 124.8px;
+      }
+      .layer-1-icon {
+        position: fixed;
+        top: 16cm;
+        right: 4cm;
+        overflow: hidden;
+      }
+      .profile-circle-icon-512x512-zx{
+        position: absolute;
+        left: 15.33cm;
+        top: 4cm;
+        object-fit: cover;
+        width: 7cm;
+        height: 7cm; /*width dan height harus sama untuk lingkaran*/
+        border-radius: 50%; /*border radius 50% untuk lingkaran*/
+        overflow: hidden;
+      }
+      .profile-circle-icon-512x512-zx1 {
+        position: fixed;
+        top: 27px;
+        left: 1333px;
+        width: 69px;
+        height: 69px;
+        object-fit: cover;
+        z-index: 1;
+      }
+      #description-submit{
+        margin-top: 10cm;
+        position: absolute;
+        top: 20cm;
+        width: 4cm;
+        left: 5cm;
+        background: none;
+        display: none;
+      }
+      .profile {
+        position: relative;
+        background-color: #fff;
+        width: 100%;
+        height: 1276px;
+        font-size: var(--font-size-5xl);
+        color: var(--color-dimgray);
+        font-family: var(--font-inter);
+      
+      }
+      textarea {
+        position: absolute;
+        left: 6.9cm;
+        width: 25cm;
+        height: 3.6cm;
+        top: 13.7cm;
+        padding: 5px; 
+        border: 2px solid #ccc; 
+        border-radius: 4px;
+        background-color: #f8f8f8; 
+        resize: none; 
+      }
+      #homeText:hover{
+        cursor:pointer;
+      }
+      #exploreText:hover{
+        cursor:pointer;
+      }
+      #myFavouriteText:hover{
+        cursor:pointer;
+      }
+    </style>
   </head>
   <body>
     <div class="profile"> <!--keseluruhan-->
@@ -23,7 +252,7 @@
         <b class="logo" id="lOGOText">LOGO</b>
         <div class="home" id="homeText" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</div>
         <div class="explore" id="exploreText" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</div>
-        <div class="profile-item"></div>
+        <div class="profile-item" <?php if($currentPage != 'profilePage.php') echo "style='display:none;'"?>></div>
         <input type="text" class="rectangle-div" placeholder="Search..."  id="search"></input>
         <img
         class="heart-svgrepo-com-2-1"
@@ -33,18 +262,11 @@
         />
         <div class="my-favourite" id="myFavouriteText" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>My Favourite</div>
       </div>
-      <div class="ellipse-div"> </div>  
       <form action="profilePage.php" method="post">
         <div class="logout-wrapper">
           <input type="submit" value="Logout" class="logout" name="logout">
         </div>
       </form>   
-      <?php
-        if(isset($_POST['logout'])){
-          session_destroy();
-          header("Location: loginPage.php");
-        }
-      ?>
       <div class="posts">Posts</div>
       <form action="profilePage.php" method="post"> <!--description-->
         <textarea name="textarea" id="textarea"><?php
@@ -140,21 +362,14 @@
       var myFavouriteText = document.getElementById("myFavouriteText");
       if (myFavouriteText) {
         myFavouriteText.addEventListener("click", (e) => {
-          // Please sync "MY FAVOURITE" to the project
+          window.location.href="favouritePage.php";
         });
       }
-      
-      var lOGOText = document.getElementById("lOGOText");
-      if (lOGOText) {
-        lOGOText.addEventListener("click", (e) => {
-          // Please sync "HOME" to the project
-        });
-      }
-      
+         
       var heartSvgrepoCom21 = document.getElementById("heartSvgrepoCom21");
       if (heartSvgrepoCom21) {
         heartSvgrepoCom21.addEventListener("click", (e) => {
-          // Please sync "MY FAVOURITE" to the project
+          window.location.href="favouritePage.php";
         });
       }
     </script>

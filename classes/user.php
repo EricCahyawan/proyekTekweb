@@ -1,32 +1,32 @@
 <?php
     class user{
-
+		public static function set_topic_by_email($email = null, $condition = null, $topic = null){
+			$conn = user :: get_db_connection();
+			$query = "UPDATE user SET {$topic} = {$condition} WHERE email = '{$email}';";
+			$result = $conn->exec($query);
+		}
 		public static function add_description_user_by_email($description = null, $email = null){
 			$conn = user :: get_db_connection();
 			$query = "UPDATE user SET description = '{$description}' WHERE email = '{$email}';";
 			$result = $conn->exec($query);
 		}
-
         public static function add_user($username = null, $email = null, $hashedpassword = null){
 			$conn = user :: get_db_connection();
 			$query = "INSERT INTO user (username, email, password) VALUES ('{$username}', '{$email}', '{$hashedpassword}')";
 			$result = $conn->exec($query);
 		}
-
         public static function get_rowcount_by_email($email = null){
 			$conn = user :: get_db_connection();
 			$query = "SELECT * FROM user where email = '{$email}'";
 			$result = $conn->query($query);
 			return $result->rowCount();
 		}
-
         public static function get_user_by_email($email = null){
 			$conn = user :: get_db_connection();
 			$query = "SELECT * FROM user where email = '{$email}'";
 			$result = $conn->query($query);
 			return $result->fetch();
 		}
-
         protected static function get_db_connection()
 		{
 			$servername = "localhost";
