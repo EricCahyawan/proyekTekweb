@@ -340,7 +340,7 @@
 
          <!-- explore topic GAME -->
          <div class="col-md-4 col-12 mb-3">
-         <a href="games.php">
+         <a href="game.php">
         <div class="card card-explore" id="game">
         
           <img src="assets\game.jpg" class="card-img-top card-img-bottom" width="100%" style="object-fit: cover; height:340px">
