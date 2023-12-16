@@ -1,17 +1,17 @@
 <?php
   session_start();
-  require "includes/user.php";
+  require "classes/user.php";
   $currentPage = basename($_SERVER['PHP_SELF']);
-  // $result = user :: get_user_by_email($_SESSION['email']);
-  // $_SESSION['favoritsport'] = $result['favoritsport'];
-  // $_SESSION['favoritmakeup'] = $result['favoritmakeup'];
-  // $_SESSION['favoritkpop'] = $result['favoritkpop'];
-  // $_SESSION['favorithairstyle'] = $result['favorithairstyle'];
-  // $_SESSION['favoritdrawing'] = $result['favoritdrawing'];
-  // $_SESSION['favoritbaking'] = $result['favoritbaking'];
-  // $_SESSION['favoritcooking'] = $result['favoritcooking'];
-  // $_SESSION['favoritcar'] = $result['favoritcar'];
-  // $_SESSION['favoritgame'] = $result['favoritgame'];
+  $result = user :: get_user_by_email($_SESSION['email']);
+  $_SESSION['favoritsport'] = $result['favoritsport'];
+  $_SESSION['favoritmakeup'] = $result['favoritmakeup'];
+  $_SESSION['favoritkpop'] = $result['favoritkpop'];
+  $_SESSION['favorithairstyle'] = $result['favorithairstyle'];
+  $_SESSION['favoritdrawing'] = $result['favoritdrawing'];
+  $_SESSION['favoritbaking'] = $result['favoritbaking'];
+  $_SESSION['favoritcooking'] = $result['favoritcooking'];
+  $_SESSION['favoritcar'] = $result['favoritcar'];
+  $_SESSION['favoritgame'] = $result['favoritgame'];
 ?>
 <?php
   if(count($_GET) && isset($_GET['followfavoritsport'])){
