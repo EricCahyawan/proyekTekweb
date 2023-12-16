@@ -30,17 +30,17 @@ include 'includes/connect.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="homePage.php">Home</a>
+              <a class="nav-link" id="home-text" href="homePage.php">Home</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="explorePage.php">Explore</a>
+              <a class="nav-link active" id="explore-text" href="explorePage.php">Explore</a>
             </li>
 
             <input type="text" class="rectangle-div" placeholder="Search..."></input>
                     
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\hati.png"/> My Favourite</a>
+              <a class="nav-link" id="favourite-text" href="#"><img src="assets\hati.png"/> My Favourite</a>
             </li>
 
             <li class="nav-item">
