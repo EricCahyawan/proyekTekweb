@@ -7,6 +7,43 @@
     header("Location:loginPage.php");
   }
 ?>
+<?php
+  if(isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] == 0) {
+    $allowedExtensions = ['jpg', 'jpeg', 'png'];
+    $uploadedExtension = strtolower(pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION));
+
+    // Check if the uploaded file has a valid extension
+    if (in_array($uploadedExtension, $allowedExtensions)) {
+        $uploadDir = 'D:\xampp\htdocs\proyekTekweb\profilepicture';
+        $uploadFile = $uploadDir . basename($_FILES['profileImage']['name']);
+
+        // Move the uploaded file to the specified directory
+        if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $uploadFile)) {
+            // Update the user's profile image path in the database
+            $email = $_SESSION['email'];
+            $imagePath = 'D:\xampp\htdocs\proyekTekweb\profilepicture' . basename($_FILES['profileImage']['name']);
+
+            // Update the 'src' column in the 'user' table
+            $result = user::update_user_image($email, $imagePath);
+
+            if ($result) {
+                // Redirect to the profile page or show a success message
+                header("Location: profilePage.php");
+                exit();
+            } else {
+                // Handle the database update failure
+                echo "Failed to update profile image in the database.";
+            }
+        } else {
+            // Handle file upload failure
+            echo "Failed to move the uploaded file.";
+        }
+    } else {
+        // Handle invalid file extension
+        echo "Invalid file extension. Please upload a JPG or PNG file.";
+    }
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -277,12 +314,12 @@
           }
         ?></textarea>
         <button id="description-submit" name="save-changes">Save changes</button>
-      </form>
+      </form> 
       <div id="username-email-container">
         <div class="username"><?php echo $_SESSION['username'];?></div>
         <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
       </div>
-      <form action="profilePage.php" method="post">
+      <form action="profilePage.php" method="post" enctype="multipart/form-data">
         <input type="file" name="profileImage" id="fileInput" onchange="readURL(this);" style="display: none;">
         <!--profile utama-->
       </form>

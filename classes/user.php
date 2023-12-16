@@ -27,6 +27,19 @@
 			$result = $conn->query($query);
 			return $result->fetch();
 		}
+
+		public static function update_user_image($email, $imagePath) {
+			$conn = user :: get_db_connection();
+			// Sanitize input to prevent SQL injection
+			$email = mysqli_real_escape_string($conn, $email);
+			$imagePath = mysqli_real_escape_string($conn, $imagePath);
+			// Update the 'src' column in the 'user' table
+			$query = "UPDATE user SET src = '$imagePath' WHERE email = '$email'";
+			$result = $conn->query($query);
+	
+			return $result;
+		}
+
         protected static function get_db_connection()
 		{
 			$servername = "localhost";
