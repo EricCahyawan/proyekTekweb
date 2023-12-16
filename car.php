@@ -37,7 +37,7 @@ include 'includes/connect.php';
               <a class="nav-link active" id="explore-text" href="explorePage.php">Explore</a>
             </li>
 
-            <input type="text" class="rectangle-div" placeholder="Search..."></input>
+            <input type="text" class="rectangle-div" id="search" placeholder="Search..."></input>
                     
             <li class="nav-item">
               <a class="nav-link" id="favourite-text" href="#"><img src="assets\hati.png"/> My Favourite</a>
