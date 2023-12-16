@@ -42,7 +42,7 @@
                     <h2>Sign Up</h2>
                     <div class="inputbox">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="username" name="username" required>
+                        <input type="username" name="username" required autofocus>
                         <label for="">Username</label>
                     </div>
                     <div class="inputbox">

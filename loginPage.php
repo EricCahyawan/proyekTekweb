@@ -35,7 +35,7 @@
                     <h2>Login</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" required autofocus>
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox toggle-password">
