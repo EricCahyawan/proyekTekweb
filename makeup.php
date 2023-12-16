@@ -1,8 +1,12 @@
 <?php
 include 'includes/connect.php';
-
+require 'classes/user.php';
 
   ?>
+  <?php
+    $result = user::get_user_by_email($_SESSION['email']);
+    $_SESSION['src'] = $result['src'];
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,14 +19,47 @@ include 'includes/connect.php';
     />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="stylegithub.css"/>
-
+    <style>
+      .profile-circle-icon-512x512-zx1 {
+        width: 69px;
+        height: 69px;    
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
+      }
+      #home-text{
+        position:absolute;
+        top:0.5cm;
+        left:4cm;
+      }
+      #explore-text{
+        position:absolute;
+        top:0.5cm;
+        left:7cm;
+      }
+      #search{
+        position:absolute;
+        top:0.5cm;
+        left:11cm;
+        height:1.6cm
+      }
+      #favourite-text{
+        position:absolute;
+        top:0.5cm;
+        left:29.7cm;
+      }
+      #profile{
+        position:absolute;
+        top:0.1cm;
+        left:35cm;
+      }
+    </style>
 </head>
 <body>
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">LOGO</a>
+      <div class="container-fluid" style="height:2cm">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,21 +67,29 @@ include 'includes/connect.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="homePage.php">Home</a>
+              <a  id="home-text" class="nav-link" href="homePage.php">Home</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="explorePage.php">Explore</a>
+              <a id="explore-text" class="nav-link active" href="explorePage.php">Explore</a>
             </li>
 
             <input type="text" class="rectangle-div" placeholder="Search..."></input>
                     
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\hati.png"/> My Favourite</a>
+              <a id="favourite-text" class="nav-link" href="#"><img src="assets\hati.png"/> My Favourite</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
+              <a  id= "profile" class="nav-link" href="#"><?php
+                            $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+                            echo "<img
+                                    id='profile-atas'
+                                    class='profile-circle-icon-512x512-zx1'
+                                    alt=''
+                                    src='{$src}'
+                                    />"
+                            ?>  <!--profile atas--></a>
             </li>
 
           </ul>

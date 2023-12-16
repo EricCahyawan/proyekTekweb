@@ -114,34 +114,47 @@
   <body>
     
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="homePage.php" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" href="explorePage.php" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</a>
-                    </li>
-
-                    <input type="text" class="rectangle-div" placeholder="Search..."></input>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="favouritePage.php" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>><img src="assets\hati.png"/> My Favourite</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="profile"> <!--keseluruhan-->
+      <div class="container-fluid" id="profile-child"> <!--navbar-->
+        <div class="home" id="homeText" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</div>
+        <div class="explore" id="exploreText" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</div>
+        <div class="profile-item" <?php if($currentPage != 'profilePage.php') echo "style='display:none;'"?>></div>
+        <input type="text" class="rectangle-div" placeholder="Search..."  id="search"></input>
+        <img
+        class="heart-svgrepo-com-2-1"
+        alt=""
+        src="assets\hati.png"
+        id="heartSvgrepoCom21"
+        />
+        <div class="my-favourite" id="myFavouriteText" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>My Favourite</div>
+      </div>
+      <form action="profilePage.php" method="post">
+        <div class="logout-wrapper">
+          <input type="submit" value="Logout" class="logout" name="logout">
         </div>
-    </nav>
+      </form>   
+      <div class="posts">Posts</div>
+      <div id="username-email-container">
+        <div class="username"><?php echo $_SESSION['username'];?></div>
+        <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
+      </div>
+      <form action="profilePage.php" method="post" enctype="multipart/form-data" id="profileImageForm">
+        <input type="file" name="profileImage" id="fileInput" onchange="submitForm()" style="display: none;">
+        <!--profile utama-->
+      </form>
+      <?php
+          $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+          echo "<img
+                  id='profile-atas'
+                  class='profile-circle-icon-512x512-zx1'
+                  alt=''
+                  src='{$src}'
+                />"
+        ?>  <!--profile atas-->
+    </div>
 
    
-    <div class="content">
+    <div class="content" style="margin-top:3cm">
       <div class="content-web my-4">
         <div class="row">
     
@@ -381,7 +394,7 @@
       
       var homeText = document.getElementById("homeText");
       homeText.addEventListener("click", (e) => {
-      window.alert("Clicked!");});
+        window.location.href = "homePage.php";});
  
       
       var myFavouriteText = document.getElementById("myFavouriteText");

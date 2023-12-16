@@ -53,6 +53,33 @@ if (isset($_POST['upload'])) {
         overflow: hidden;
         object-fit: cover;
       }
+      #home-text{
+        position:absolute;
+        top:0.5cm;
+        left:4cm;
+      }
+      #explore-text{
+        position:absolute;
+        top:0.5cm;
+        left:7cm;
+      }
+      #search{
+        position:absolute;
+        top:0.5cm;
+        left:11cm;
+        height:1.6cm
+      }
+      #favourite-text{
+        position:absolute;
+        top:0.5cm;
+        left:29.7cm;
+      }
+      #profile{
+        position:absolute;
+        top:0.1cm;
+        left:35cm;
+      }
+
     </style>
 </head>
 
@@ -60,7 +87,7 @@ if (isset($_POST['upload'])) {
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container-fluid">
+        <div class="container-fluid" style="height:2cm">
            
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,21 +97,21 @@ if (isset($_POST['upload'])) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a id="home-text" class="nav-link active" href="homePage.php" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="explorePage.php">Explore</a>
+                        <a id="explore-text"class="nav-link" href="explorePage.php" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</a>
                     </li>
 
-                    <input type="text" class="rectangle-div" placeholder="Search..."></input>
+                    <input id="search" type="text" class="rectangle-div" placeholder="Search..."></input>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="favouritePage.php"><img src="assets\hati.png"/> My Favourite</a>
+                        <a id="favourite-text" class="nav-link" href="favouritePage.php" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>><img src="assets\hati.png"/> My Favourite</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="profilePage.php"><?php
+                        <a id= "profile" class="nav-link" href="profilePage.php"><?php
                             $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
                             echo "<img
                                     id='profile-atas'
