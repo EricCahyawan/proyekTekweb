@@ -147,7 +147,7 @@ if (isset($_POST['upload'])) {
             <div class="position-fixed bottom-0 end-0 tombol-add">
                 <div class="d-grid gap-2">
                     <button class="btn" data-bs-toggle="modal" data-bs-target="#modalAddPost" name="addpost">                          
-                    <img class="layer-1-icon" src="assets\Layer_1.png"/>
+                    <img class="layer-1-icon" src="assets\plus.png"/>
                 </div>
             </div>
         </div>
