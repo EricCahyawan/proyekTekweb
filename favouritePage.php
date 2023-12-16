@@ -12,7 +12,10 @@
   $_SESSION['favoritcooking'] = $result['favoritcooking'];
   $_SESSION['favoritcar'] = $result['favoritcar'];
   $_SESSION['favoritgame'] = $result['favoritgame'];
+  $result = user::get_user_by_email($_SESSION['email']);
+  $_SESSION['src'] = $result['src'];
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -74,6 +77,11 @@
         background-color: #d9d9d9;
         width: 14500px;
         height: 119px;
+      }
+      .profile-circle-icon-512x512-zx1{
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
       }
       .profile-item {
         top: 15px;
@@ -178,7 +186,6 @@
   <body>
     <div class="profile"> <!--keseluruhan-->
       <div class="container-fluid" id="profile-child"> <!--navbar-->
-        <b class="logo" id="lOGOText">LOGO</b>
         <div class="home" id="homeText" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</div>
         <div class="explore" id="exploreText" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</div>
         <div class="profile-item" <?php if($currentPage != 'profilePage.php') echo "style='display:none;'"?>></div>
@@ -192,12 +199,15 @@
         <div class="my-favourite" id="myFavouriteText" <?php if ($currentPage == 'favouritePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>My Favourite</div>
       </div>
       <img class="layer-1-icon" alt="" src="assets\Layer_1.png" /> <!--tombol add post-->
-      <img
-        id="profile-atas"
-        class="profile-circle-icon-512x512-zx1"
-        alt=""
-        src="assets\profileicon.png"
-      /> <!--profile atas-->
+      <?php
+          $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+          echo "<img
+                  id='profile-atas'
+                  class='profile-circle-icon-512x512-zx1'
+                  alt=''
+                  src='{$src}'
+                />"
+        ?>  <!--profile atas-->
       <div id="list-topik">
         <?php
             if($_SESSION['favoritsport'] == 1){
@@ -306,7 +316,7 @@
       
       var homeText = document.getElementById("homeText");
       homeText.addEventListener("click", (e) => {
-      window.alert("Clicked!");});
+      window.location.href= "homePage.php"});
  
       
       var myFavouriteText = document.getElementById("myFavouriteText");

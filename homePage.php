@@ -1,7 +1,8 @@
 <?php
-
+session_start();
 include 'includes/connect.php';
-
+require 'classes/user.php';
+$currentPage = basename($_SERVER['PHP_SELF']);
 // if (empty($session_login))
 //     header('location: login.php');
 
@@ -28,6 +29,10 @@ if (isset($_POST['upload'])) {
     }
 }
 ?>
+<?php
+    $result = user::get_user_by_email($_SESSION['email']);
+    $_SESSION['src'] = $result['src'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +45,15 @@ if (isset($_POST['upload'])) {
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .profile-circle-icon-512x512-zx1 {
+        width: 69px;
+        height: 69px;    
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
+      }
+    </style>
 </head>
 
 <body>
@@ -47,7 +61,7 @@ if (isset($_POST['upload'])) {
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">LOGO</a>
+           
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -70,7 +84,16 @@ if (isset($_POST['upload'])) {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="profilePage.php"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
+                        <a class="nav-link" href="profilePage.php"><?php
+                            $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+                            echo "<img
+                                    id='profile-atas'
+                                    class='profile-circle-icon-512x512-zx1'
+                                    alt=''
+                                    src='{$src}'
+                                    />"
+                            ?>  <!--profile atas-->
+                        </a>
                     </li>
 
                 </ul>

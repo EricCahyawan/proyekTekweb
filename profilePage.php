@@ -240,8 +240,10 @@
         left: 1333px;
         width: 69px;
         height: 69px;
-        object-fit: cover;
         z-index: 1;
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
       }
       #description-submit{
         margin-top: 10cm;
@@ -288,7 +290,6 @@
   <body>
     <div class="profile"> <!--keseluruhan-->
       <div class="container-fluid" id="profile-child"> <!--navbar-->
-        <b class="logo" id="lOGOText">LOGO</b>
         <div class="home" id="homeText" <?php if ($currentPage == 'homePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Home</div>
         <div class="explore" id="exploreText" <?php if ($currentPage == 'explorePage.php') echo 'style="border-radius: 20%; background-color: #545454; color: #ffffff;"'; ?>>Explore</div>
         <div class="profile-item" <?php if($currentPage != 'profilePage.php') echo "style='display:none;'"?>></div>
@@ -336,12 +337,15 @@
         ?>
       <div class="line-div"></div> <!--garis-->
       <img class="layer-1-icon" alt="" src="assets\Layer_1.png" /> <!--tombol add post-->
-      <img
-        id="profile-atas"
-        class="profile-circle-icon-512x512-zx1"
-        alt=""
-        src="assets\profileicon.png"
-      /> <!--profile atas-->
+      <?php
+          $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+          echo "<img
+                  id='profile-atas'
+                  class='profile-circle-icon-512x512-zx1'
+                  alt=''
+                  src='{$src}'
+                />"
+        ?>  <!--profile atas-->
     </div>
   
     <script>
@@ -378,7 +382,7 @@
       
       var homeText = document.getElementById("homeText");
       homeText.addEventListener("click", (e) => {
-      window.alert("Clicked!");});
+      window.location.href="homePage.php";});
  
       
       var myFavouriteText = document.getElementById("myFavouriteText");
