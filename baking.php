@@ -40,7 +40,7 @@ include 'includes/connect.php';
             <input type="text" class="rectangle-div" placeholder="Search..."></input>
                     
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\hati.png"/> My Favourite</a>
+              <a class="nav-link" href="favouritePage.php"><img src="assets\hati.png"/> My Favourite</a>
             </li>
 
             <li class="nav-item">
