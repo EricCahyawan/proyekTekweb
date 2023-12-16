@@ -40,13 +40,13 @@ include 'includes/connect.php';
             <input type="text" class="rectangle-div" id="search" placeholder="Search..."></input>
                     
             <li class="nav-item">
-              <a class="nav-link" id="favourite-text" href="#"><img src="assets\hati.png"/> My Favourite</a>
+              <a class="nav-link" id="favourite-text" href="favouritePage.php"><img src="assets\hati.png"/> My Favourite</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
+              <a class="nav-link" id="profile" href="#"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
             </li>
-
+            
           </ul>
         </div>
       </div>
