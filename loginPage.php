@@ -21,7 +21,7 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
                 user:: add_description_user_by_email($description, $row['email']);
-                header("Location:profilePage.php");
+                header("Location:homePage.php");
             }
         } else {
             echo "<script>window.alert('Email doesn\'t exist');</script>";
