@@ -42,7 +42,7 @@ include 'includes/connect.php';
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
+              <a class="nav-link" id="profile" href="#"><img src="assets\profileicon (3).png" style="size: 20px"/></a>
             </li>
 
           </ul>
