@@ -278,14 +278,6 @@
         ?></textarea>
         <button id="description-submit" name="save-changes">Save changes</button>
       </form>
-      <?php
-        if(count($_POST) > 0 && isset($_POST['save-changes'])){
-          $email = $_SESSION['email'];
-          $description = $_POST['textarea'];
-          user :: add_description_user_by_email($description, $email);
-          header("Location:profilePage.php");
-        }
-      ?>
       <div id="username-email-container">
         <div class="username"><?php echo $_SESSION['username'];?></div>
         <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
@@ -338,13 +330,6 @@
         }
       }
       
-      document.getElementById('textarea').addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault(); // Prevent the default Enter key behavior (new line)
-          document.getElementById('description-submit').click();
-        }
-      });
-  
       var profileatas = document.getElementById("profile-atas");
       profileatas.addEventListener("click", (e) => {
         window.location.href = "profilePage.php";

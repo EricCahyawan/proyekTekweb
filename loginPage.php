@@ -3,6 +3,31 @@
     require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
     session_start();
 ?>
+<?php 
+    if (count($_POST) > 0 && isset($_POST['logIn'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $description = $_POST['description'];
+        $rowcount = user::get_rowcount_by_email($email);
+
+        if ($rowcount > 0) {
+            $row = user::get_user_by_email($email);
+            $hashedPassword = $row['password'];
+
+            if (password_verify($password, $hashedPassword)) {
+                echo '<script>window.alert("Invalid Password");</script>';
+            } else {
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['password'] = $row['password'];
+                user:: add_description_user_by_email($description, $row['email']);
+                header("Location:profilePage.php");
+            }
+        } else {
+            echo "<script>window.alert('Email doesn\'t exist');</script>";
+        }
+    }
+?>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="index.css">
@@ -45,8 +70,10 @@
                         </div>
                         <label for="">Password</label>
                     </div>
-                    <div class="forget">
-                        <label for=""><input type="checkbox">Save Account <a href="#"></a></label>
+                    <div class="inputbox">
+                        <ion-icon name="text-outline"></ion-icon>
+                        <input type="text" name="description">
+                        <label for="">Description(not mandatory)</label>
                     </div>
                     <button name="logIn">Log In</button>
                     <div class="register">
@@ -74,27 +101,4 @@
         }
     </script>
 </body>
-<?php
-    if(count($_POST) > 0 && isset($_POST['logIn'])){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $rowcount = user :: get_rowcount_by_email($email);
-        if($rowcount > 0){
-            $row = user :: get_user_by_email($email);
-            $hashedPassword = $row['password'];
-            if(password_verify($password, $hashedPassword)){
-                echo '<script>window.alert("Invalid Password");</script>';
-            } 
-            else {
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['password'] = $row['password'];
-                header("Location: profilePage.php");
-            }
-        }
-        else{
-            echo "<script>window.alert('Email doesn\'t exist');</script>";
-        }
-    }
-?>
 </html>
