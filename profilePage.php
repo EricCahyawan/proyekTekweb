@@ -1,6 +1,8 @@
 <?php
   require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
   session_start();
+  $result = user::get_user_by_email($_SESSION['email']);
+  $_SESSION['src'] = $result['src'];
   $currentPage = basename($_SERVER['PHP_SELF']);
   if(isset($_POST['logout'])){
     session_destroy();
@@ -8,20 +10,20 @@
   }
 ?>
 <?php
-  if(isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] == 0) {
+  if(isset($_FILES['profileImage'])) {
     $allowedExtensions = ['jpg', 'jpeg', 'png'];
     $uploadedExtension = strtolower(pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION));
 
     // Check if the uploaded file has a valid extension
     if (in_array($uploadedExtension, $allowedExtensions)) {
-        $uploadDir = 'D:\xampp\htdocs\proyekTekweb\profilepicture';
+        $uploadDir = 'D:/xampp/htdocs/proyekTekweb/profilepicture/';
         $uploadFile = $uploadDir . basename($_FILES['profileImage']['name']);
 
         // Move the uploaded file to the specified directory
         if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $uploadFile)) {
             // Update the user's profile image path in the database
             $email = $_SESSION['email'];
-            $imagePath = 'D:\xampp\htdocs\proyekTekweb\profilepicture' . basename($_FILES['profileImage']['name']);
+            $imagePath = 'profilepicture/' . basename($_FILES['profileImage']['name']);;
 
             // Update the 'src' column in the 'user' table
             $result = user::update_user_image($email, $imagePath);
@@ -32,15 +34,15 @@
                 exit();
             } else {
                 // Handle the database update failure
-                echo "Failed to update profile image in the database.";
+                echo "<script>window.alert('Failed to upload');</script>";
             }
         } else {
             // Handle file upload failure
-            echo "Failed to move the uploaded file.";
+            echo "<script>window.alert('Failed to move the uploaded file.');</script>";
         }
     } else {
         // Handle invalid file extension
-        echo "Invalid file extension. Please upload a JPG or PNG file.";
+        echo "<script>window.alert('Invalid file extension. Please upload a JPG or PNG file.');</script>";
     }
 }
 ?>
@@ -319,25 +321,18 @@
         <div class="username"><?php echo $_SESSION['username'];?></div>
         <div class="emailemailcom"><?php echo $_SESSION['email'];?></div>
       </div>
-      <form action="profilePage.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="profileImage" id="fileInput" onchange="readURL(this);" style="display: none;">
+      <form action="profilePage.php" method="post" enctype="multipart/form-data" id="profileImageForm">
+        <input type="file" name="profileImage" id="fileInput" onchange="submitForm()" style="display: none;">
         <!--profile utama-->
       </form>
       <?php
-          $email = $_SESSION['email'];
-          $result = user :: get_user_by_email($email);
-          $_SESSION['src'] = $result['src'];
-          $src = $_SESSION['src'];
-          // echo "<script>window.alert('{$src}');</script>"; //di database slashnya dah bener, tapi di programnya slashnya nda keluar
-          // $query2 = "UPDATE user SET src = '$src' WHERE email = '$email'";
-          // $result2 = $conn->query($query2);
-          echo 
-          "<img
-          id='profile-utama'
-          class='profile-circle-icon-512x512-zx'
-          alt=''
-          src= '{$src}'
-          />"; 
+          $src = isset($_SESSION['src']) ? $_SESSION['src'] : 'assets\profileicon.png';
+          echo "<img
+                  id='profile-utama'
+                  class='profile-circle-icon-512x512-zx'
+                  alt=''
+                  src='{$src}'
+                />";
         ?>
       <div class="line-div"></div> <!--garis-->
       <img class="layer-1-icon" alt="" src="assets\Layer_1.png" /> <!--tombol add post-->
@@ -367,6 +362,11 @@
         }
       }
       
+      function submitForm() {
+            // Trigger the form submission when a file is selected
+            document.getElementById("profileImageForm").submit();
+        }
+
       var profileatas = document.getElementById("profile-atas");
       profileatas.addEventListener("click", (e) => {
         window.location.href = "profilePage.php";

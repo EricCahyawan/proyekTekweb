@@ -73,7 +73,7 @@
                     <div class="inputbox">
                         <ion-icon name="text-outline"></ion-icon>
                         <input type="text" name="description">
-                        <label for="">Description(not mandatory)</label>
+                        <label for="">Description(for this session only)</label>
                     </div>
                     <button name="logIn">Log In</button>
                     <div class="register">

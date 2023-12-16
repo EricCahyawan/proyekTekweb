@@ -29,15 +29,19 @@
 		}
 
 		public static function update_user_image($email, $imagePath) {
-			$conn = user :: get_db_connection();
-			// Sanitize input to prevent SQL injection
-			$email = mysqli_real_escape_string($conn, $email);
-			$imagePath = mysqli_real_escape_string($conn, $imagePath);
-			// Update the 'src' column in the 'user' table
-			$query = "UPDATE user SET src = '$imagePath' WHERE email = '$email'";
-			$result = $conn->query($query);
+			$conn = user::get_db_connection();
 	
-			return $result;
+			try {
+				$stmt = $conn->prepare("UPDATE user SET src = :imagePath WHERE email = :email");
+				$stmt->bindParam(':imagePath', $imagePath);
+				$stmt->bindParam(':email', $email);
+	
+				$stmt->execute();
+				return true; // Assuming success
+			} catch (PDOException $e) {
+				echo "Error: " . $e->getMessage();
+				return false;
+			}
 		}
 
         protected static function get_db_connection()
