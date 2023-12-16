@@ -44,6 +44,25 @@
 			}
 		}
 
+	    public static function search_user_by_username($username = null){
+			$conn = self::get_db_connection();
+	
+			try {
+				$query = "SELECT id, username,email, description, src FROM user WHERE username LIKE :username";
+				$stmt = $conn->prepare($query);
+				$stmt->bindValue(':username', "%{$username}%", PDO::PARAM_STR);
+				$stmt->execute();
+	
+				$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+				
+				return $results;
+			} catch (PDOException $e) {
+				echo "Error: " . $e->getMessage();
+			}
+	
+			return [];
+		}
+
         protected static function get_db_connection()
 		{
 			$servername = "localhost";
