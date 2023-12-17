@@ -1,5 +1,5 @@
 <?php
-  require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
+  require "classes/user.php"; 
   session_start();
   $result = user::get_user_by_email($_SESSION['email']);
   $_SESSION['src'] = $result['src'];
