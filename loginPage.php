@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php 
-    require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
+    require "classes/user.php"; 
     session_start();
 ?>
 <?php 
