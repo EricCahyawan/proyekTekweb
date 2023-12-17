@@ -62,6 +62,21 @@
 	
 			return [];
 		}
+	    public static function get_user_by_id($id = null){
+			$conn = self::get_db_connection();
+			try {
+				$query = "SELECT * FROM user WHERE id = :id";
+				$stmt = $conn->prepare($query);
+				$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+				$stmt->execute();
+
+				$results = $stmt->fetch(PDO::FETCH_ASSOC);
+				return $results;
+			} catch (PDOException $e) {
+				echo "Error: " . $e->getMessage();
+			}
+			return [];
+		}
 
         protected static function get_db_connection()
 		{
