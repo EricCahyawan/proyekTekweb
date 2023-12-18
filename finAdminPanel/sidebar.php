@@ -11,6 +11,7 @@
     <a id="postDeletionLink" href="postDeletion.php"><i class="fa fa-trash"></i> Post Deletion</a>
     <a id="reportsLink" href="reports.php"><i class="fa fa-flag"></i> Reports</a>
     <a id="requestsLink" href="requests.php"><i class="fa fa-comments"></i> Requests</a>
+    <a id="categoryLink" href="category.php"><i class="fa fa-comments"></i>Manage Categories</a>
 </div>
 
 <div id="main">
@@ -53,6 +54,12 @@
         event.preventDefault();
         window.location.href = "requests.php";
     });
+
+       document.getElementById("CategoryLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = "category.php";
+    });
+    
 </script>
 </body>
 </html>
