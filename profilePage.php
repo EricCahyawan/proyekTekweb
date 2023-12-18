@@ -401,5 +401,82 @@
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <!-- Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary">
+        <h5 class="modal-title">Profile User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12 justify-content-center text-center">
+          <!-- Added styles for a circular image -->
+          <img id="image" src="" alt="Profile Image" style="width: 200px; max-width: 100%; border-radius: 50%;" />
+          <p class="text-capitalize pt-2 h4" id="username"></p>
+          <p id="description"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script>
+      let searchResultsDropdown = document.getElementById('search-results');
+
+      document.getElementById('search').addEventListener('input', function(e) {
+        let searchTerm = e.target.value.trim();
+        
+        // Make an AJAX request when the search term length is more than 2 characters
+        if (searchTerm.length > 2) {
+          fetch('search.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'searchTerm=' + encodeURIComponent(searchTerm),
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            searchResultsDropdown.classList.remove('d-none');
+            searchResultsDropdown.innerHTML = '';
+
+            let resultsHTML = '<div class="list-group">'; 
+            
+            if (data.length > 0) { 
+              data.forEach(result => {
+                resultsHTML += `
+                  <a href="#" class="p-2 text-decoration-none list-group-item-action text-capitalize" onclick="openModal('${result.username}', '${result.description}', '${result.src.replace(/\\/g, '\\\\')}')">${result.username}</a>
+                `;
+              });
+            } else {
+              resultsHTML = `
+                <div class="list-group-item list-group-item-action">
+                  No results found
+                </div>
+              `;
+            }
+            resultsHTML += '</div>';
+
+            searchResultsDropdown.innerHTML = resultsHTML; 
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        } else {
+          searchResultsDropdown.classList.add('d-none');
+          searchResultsDropdown.innerHTML = ''; 
+        }
+      });
+
+      function openModal(username, description, src) {
+        console.log(username, description, src);
+        document.getElementById('username').innerText = username;
+        document.getElementById('description').innerText = description;
+        document.getElementById('image').src = src;
+        new bootstrap.Modal(document.getElementById('profileModal')).show();
+      }
+    </script>
   </body>
 </html>
