@@ -3,6 +3,7 @@ include 'includes/connect.php';
 require 'classes/user.php';
 ?>
 <?php
+    session_start();
     $result = user::get_user_by_email($_SESSION['email']);
     $_SESSION['src'] = $result['src'];
 ?>
@@ -66,14 +67,14 @@ require 'classes/user.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a id="home-text" class="nav-link" href="homePage.php">Home</a>
+              <a class="nav-link" id="home-text" href="homePage.php">Home</a>
             </li>
 
             <li class="nav-item">
-              <a id="explore-text" class="nav-link active" href="explorePage.php">Explore</a>
+              <a class="nav-link active" id="explore-text" href="explorePage.php">Explore</a>
             </li>
 
-            <input type="text" class="rectangle-div" placeholder="Search..."></input>
+            <input type="text" class="rectangle-div" id="search" placeholder="Search..."></input>
                     
             <li class="nav-item">
               <a id="favourite-text" class="nav-link" href="favouritePage.php"><img src="assets\hati.png"/> My Favourite</a>

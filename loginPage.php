@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php 
-    require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
+    require "classes/user.php"; 
     session_start();
 ?>
 <?php 
@@ -13,15 +13,14 @@
         if ($rowcount > 0) {
             $row = user::get_user_by_email($email);
             $hashedPassword = $row['password'];
-
             if (password_verify($password, $hashedPassword)) {
-                echo '<script>window.alert("Invalid Password");</script>';
-            } else {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['password'] = $row['password'];
                 user:: add_description_user_by_email($description, $row['email']);
                 header("Location:homePage.php");
+            } else {
+                echo '<script>window.alert("Invalid Password");</script>';
             }
         } else {
             echo "<script>window.alert('Email doesn\'t exist');</script>";

@@ -1,5 +1,5 @@
 <?php 
-    require "D:/xampp/htdocs/proyekTekweb/classes/user.php"; 
+    require "classes/user.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">

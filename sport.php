@@ -4,6 +4,7 @@ require 'classes/user.php';
 
   ?>
   <?php
+    session_start();
     $result = user::get_user_by_email($_SESSION['email']);
     $_SESSION['src'] = $result['src'];
 ?>
@@ -41,7 +42,7 @@ require 'classes/user.php';
         position:absolute;
         top:0.4cm;
         left:11cm;
-        height:4cm;
+        height:2cm;
       }
       #favourite-text{
         position:absolute;
@@ -74,7 +75,7 @@ require 'classes/user.php';
               <a id="explore-text" class="nav-link active" href="explorePage.php">Explore</a>
             </li>
 
-            <input type="text" class="rectangle-div" placeholder="Search..."></input>
+            <input type="text" class="rectangle-div" id="search" placeholder="Search..."></input>
                     
             <li class="nav-item">
               <a id="favourite-text" class="nav-link" href="#"><img src="assets\hati.png"/> My Favourite</a>
