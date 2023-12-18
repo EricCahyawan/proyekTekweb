@@ -96,7 +96,15 @@ INSERT INTO `requests` (`request_id`, `username`, `request_text`) VALUES
 (5, 'user5', 'Request from user5');
 
 -- --------------------------------------------------------
+CREATE TABLE `categories` (
+  `categoriesID` int (20) NOT NULL,
+  `name` varchar (50) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO `categories` (`categoryID`, `name`) VALUES
+(1, 'kpop'),
+(2, 'car'),
+(3, 'sports');
 --
 -- Table structure for table `user`
 --
