@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 08:09 PM
+-- Generation Time: Dec 22, 2023 at 09:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -152,32 +152,33 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `description`, `src`,
 CREATE TABLE `user_post` (
   `id_post` int(11) NOT NULL,
   `id_topic` int(11) NOT NULL,
-  `data_images` text NOT NULL
+  `data_images` text NOT NULL,
+  `report_count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_post`
 --
 
-INSERT INTO `user_post` (`id_post`, `id_topic`, `data_images`) VALUES
-(17, 2, 'car.jpg'),
-(18, 1, 'cheesecake.jpg'),
-(19, 5, 'brawl star.jpg'),
-(20, 7, 'jennie.jpg'),
-(21, 4, 'doodle.jpg'),
-(22, 2, 'pink car.jpg'),
-(23, 9, 'abs workout.jpg'),
-(24, 1, 'heart rollcake.jpg'),
-(25, 3, 'bibimbap.jpg'),
-(26, 5, 'spike.jpg'),
-(27, 6, 'hs2.jpg'),
-(28, 5, 'collete.jpg'),
-(29, 7, 'lesserafim.jpg'),
-(30, 8, 'douyin.jpg'),
-(31, 9, 'jogging.jpg'),
-(32, 2, 'porsche.jpg'),
-(33, 7, 'BABYMONSTER -  BATTER UP  M_V TEASER.mp4'),
-(34, 6, 'hime.jpg');
+INSERT INTO `user_post` (`id_post`, `id_topic`, `data_images`, `report_count`) VALUES
+(17, 2, 'car.jpg', 0),
+(18, 1, 'cheesecake.jpg', 0),
+(19, 5, 'brawl star.jpg', 0),
+(20, 7, 'jennie.jpg', 0),
+(21, 4, 'doodle.jpg', 0),
+(22, 2, 'pink car.jpg', 0),
+(23, 9, 'abs workout.jpg', 0),
+(24, 1, 'heart rollcake.jpg', 0),
+(25, 3, 'bibimbap.jpg', 0),
+(26, 5, 'spike.jpg', 0),
+(27, 6, 'hs2.jpg', 0),
+(28, 5, 'collete.jpg', 0),
+(29, 7, 'lesserafim.jpg', 0),
+(30, 8, 'douyin.jpg', 0),
+(31, 9, 'jogging.jpg', 0),
+(32, 2, 'porsche.jpg', 0),
+(33, 7, 'BABYMONSTER -  BATTER UP  M_V TEASER.mp4', 0),
+(34, 6, 'hime.jpg', 0);
 
 --
 -- Indexes for dumped tables
