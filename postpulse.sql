@@ -277,6 +277,23 @@ INSERT INTO `user_post` (`id_post`, `id_topic`, `data_images`) VALUES
 (34, 6, 'hime.jpg');
 
 --
+
+CREATE TABLE `categories` (
+  `categoriesID` int (20) NOT NULL,
+  `name` varchar (50) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `categories` (`categoryID`, `name`) VALUES
+(1, 'kpop'),
+(2, 'car'),
+(3, 'sports'),
+(4,	'makeup'),	
+(5,	'hairstyle'),	
+(6,	'game'),	
+(7,	'drawing'),	
+(8,	'cooking'),	
+(9,	'baking');
+
 -- Indexes for dumped tables
 --
 
