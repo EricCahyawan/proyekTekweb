@@ -2,7 +2,38 @@
 include 'includes/connect.php';
 require 'classes/user.php';
 
-  ?>
+if (isset($_POST['simpankomentar'])) {
+  $id_post = $_POST['id_post'];
+  $username = $_POST['username'];
+  $komentar = $_POST['komentar'];
+
+  $insert_komentar = $postpulse->insert_komentar([
+      'id_post' => $id_post,
+      'username' => $username,
+      'komentar' => $komentar,
+  ]);
+
+  if ($insert_komentar) {
+      header('location: game.php?msg=komentar');
+  }
+}
+
+if (isset($_POST['simpankomentarbalasan'])) {
+  $idkomentar = $_POST['idkomentar'];
+  $username = $_POST['username'];
+  $komentar = $_POST['komentar'];
+  $insert_komentarbalasan = $postpulse->insert_komentarbalasan([
+      'idkomentar' => $idkomentar,
+      'username' => $username,
+      'komentar' => $komentar,
+  ]);
+
+  if ($insert_komentarbalasan) {
+      header('location: game.php?msg=balasan');
+  }
+}
+
+?>
   <?php
     session_start();
     $result = user::get_user_by_email($_SESSION['email']);
@@ -123,6 +154,9 @@ require 'classes/user.php';
 
       <div class="content">
         <div class="content-web my-4">
+            <?= (isset($_GET['msg']) && $_GET['msg'] == 'komentar') ? '<div class="alert alert-success">Komentar Berhasil Di Kirim!</div>' : '' ?>
+            <?= (isset($_GET['msg']) && $_GET['msg'] == 'balasan') ? '<div class="alert alert-success">Balasan Berhasil Di Kirim!</div>' : '' ?>
+          
           <div class="row">
 
             <?php
