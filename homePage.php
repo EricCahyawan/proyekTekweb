@@ -3,8 +3,7 @@ session_start();
 include 'includes/connect.php';
 require 'classes/user.php';
 $currentPage = basename($_SERVER['PHP_SELF']);
-// if (empty($session_login))
-//     header('location: login.php');
+
 
 if (isset($_POST['upload'])) {
     $id_topic = $_POST['id_topic'];
@@ -19,13 +18,39 @@ if (isset($_POST['upload'])) {
 
 
     if ($insert_post) {
-        header('location: mainpage.php?msg=posted');
-        echo '<script>
-            setTimeout(function() {
-                alert("Your message here");
-            }, 2000);
-          </script>';
+        header('location: homePage.php?msg=posted');
         exit;
+    }
+}
+
+if (isset($_POST['simpankomentar'])) {
+    $id_post = $_POST['id_post'];
+    $username = $_POST['username'];
+    $komentar = $_POST['komentar'];
+
+    $insert_komentar = $postpulse->insert_komentar([
+        'id_post' => $id_post,
+        'username' => $username,
+        'komentar' => $komentar,
+    ]);
+
+    if ($insert_komentar) {
+        header('location: homePage.php?msg=komentar');
+    }
+}
+
+if (isset($_POST['simpankomentarbalasan'])) {
+    $idkomentar = $_POST['idkomentar'];
+    $username = $_POST['username'];
+    $komentar = $_POST['komentar'];
+    $insert_komentarbalasan = $postpulse->insert_komentarbalasan([
+        'idkomentar' => $idkomentar,
+        'username' => $username,
+        'komentar' => $komentar,
+    ]);
+
+    if ($insert_komentarbalasan) {
+        header('location: homePage.php?msg=balasan');
     }
 }
 ?>
@@ -180,6 +205,8 @@ if (isset($_POST['upload'])) {
 
             <?= isset($msg) ? '<div class="alert alert-danger">' . $msg . '</div>' : '' ?>
             <?= (isset($_GET['msg']) && $_GET['msg'] == 'posted') ? '<div class="alert alert-success">Posted!</div>' : '' ?>
+            <?= (isset($_GET['msg']) && $_GET['msg'] == 'komentar') ? '<div class="alert alert-success">Komentar Berhasil Di Kirim!</div>' : '' ?>
+            <?= (isset($_GET['msg']) && $_GET['msg'] == 'balasan') ? '<div class="alert alert-success">Balasan Berhasil Di Kirim!</div>' : '' ?>
             
             <div class="row">
                 <?php
