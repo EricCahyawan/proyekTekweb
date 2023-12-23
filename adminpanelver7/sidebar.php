@@ -7,6 +7,7 @@
 
     <a id="userBanLink" href="userBan.php"><i class="fa fa-ban"></i> User Ban</a>
     <a id="postDeletionLink" href="postDeletion.php"><i class="fa fa-trash"></i> Post Deletion</a>
+     <a id="categoryLink" href="category.php"><i class="fa fa-comments"></i>Manage Categories</a>
 </div>
 
 <div id="main">
@@ -36,6 +37,10 @@
     document.getElementById("postDeletionLink").addEventListener("click", function(event) {
         event.preventDefault();
         window.location.href = "postDeletion.php";
+    });
+     document.getElementById("CategoryLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.location.href = "category.php";
     });
 </script>
 </body>
